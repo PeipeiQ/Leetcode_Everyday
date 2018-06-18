@@ -1,0 +1,24 @@
+/*
+ 101. 对称二叉树
+ 给定一个二叉树，检查它是否是镜像对称的。
+ 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+ */
+
+bool cmp(struct TreeNode *left,struct TreeNode *right){
+    if (!left&&!right) {
+        return 1;
+    }
+    if (!left||!right) {
+        return 0;
+    }
+    int res = left->val==right->val?1:0;
+    return res&&cmp(left->left, right->right)&&cmp(left->right, right->left);
+}
+
+bool isSymmetric(struct TreeNode *root){
+    if (!root) {
+        return 1;
+    }
+    return cmp(root->left, root->right);
+}
+
