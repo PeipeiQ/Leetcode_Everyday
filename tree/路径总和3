@@ -1,0 +1,37 @@
+/*
+ 437. 路径总和 III
+ 给定一个二叉树，它的每个结点都存放着一个整数值。
+ 
+ 找出路径和等于给定数值的路径总数。
+ 
+ 路径不需要从根节点开始，也不需要在叶子节点结束，但是路径方向必须是向下的（只能从父节点到子节点）。
+ 
+ 二叉树不超过1000个节点，且节点数值范围是 [-1000000,1000000] 的整数。
+ */
+/*
+ ps:思路类似路径总和1，只是对所有节点做一次路径递归，且不需要判断是否叶节点这一条件
+ */
+void sum2(struct TreeNode* root ,int temp,int sum,int *total){
+    if(!root){
+        return;
+    }
+    temp = temp+root->val;
+    
+    
+    if(temp==sum){
+        (*total)++;
+    }
+    
+    sum2(root->left,temp,sum,total);
+    sum2(root->right,temp,sum,total);
+}
+
+
+int pathSum(struct TreeNode* root, int sum) {
+    if(!root){
+        return 0;
+    }
+    int total = 0;
+    sum2(root,0,sum,&total);
+    return total+pathSum(root->left, sum)+pathSum(root->right,sum);
+}
