@@ -1,0 +1,15 @@
+/*
+53. 最大子序和
+ 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+ */
+//比较容易理解的解法
+int maxSubArray(int* nums, int numsSize) {
+    int sum=0,max=nums[0];
+    for(int i=0;i<numsSize;i++){
+        sum = sum+nums[i];
+        //关键：一旦总和比本身这一个数还小，则舍弃前面的数，保留这个数作为和的开头
+        if(sum<nums[i]) sum = nums[i];
+        if(sum>=max) max = sum;
+    }
+    return max;
+}

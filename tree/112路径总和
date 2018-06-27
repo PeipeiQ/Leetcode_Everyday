@@ -1,0 +1,39 @@
+/*
+ 112. 路径总和
+ 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。
+ 说明: 叶子节点是指没有子节点的节点。
+ */
+/*
+ ps:这种方式可以在递归过程中记录状态，而不需要进行回溯
+ */
+
+int sum(struct TreeNode*root){
+    if (!root) {
+        return 0;
+    }
+    
+    return (root->val)+sum(root->left)+sum(root->right);
+}
+
+void sum1(struct TreeNode*root,int tempSum,int desSum,int *has){
+    
+    if (!root) {
+        return;
+    }
+    
+    int temp = tempSum+root->val;
+    if(!root->right&&!root->left){
+        if(temp==desSum){
+            *has=1;
+        }
+    }
+    sum1(root->left, temp, desSum,has);
+    sum1(root->right, temp, desSum,has);
+    
+}
+
+bool hasPathSum(struct TreeNode* root, int sum) {
+    int has = 0;
+    sum1(root, 0, sum, &has);
+    return has;
+}
