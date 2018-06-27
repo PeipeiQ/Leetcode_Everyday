@@ -5,6 +5,7 @@
  *     struct TreeNode *left;
  *     struct TreeNode *right;
  * };
+ * 
  */
 bool isSameTree(struct TreeNode* p, struct TreeNode* q) {
     if (p == NULL || q == NULL) {
